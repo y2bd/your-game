@@ -1,3 +1,8 @@
+// Game Class
+//
+// Handles game logic
+
+
 #ifndef GAME_H
 #define GAME_H
 

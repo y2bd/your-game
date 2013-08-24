@@ -1,3 +1,7 @@
+// Render Class
+//
+// Renders all game elements
+
 #ifndef RENDER_H
 #define RENDER_H
 

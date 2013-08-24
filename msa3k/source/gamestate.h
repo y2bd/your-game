@@ -1,3 +1,8 @@
+// Gamestate Class
+//
+// Stores Game data and other information (entities, maps, etc.)
+
+
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 

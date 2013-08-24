@@ -1,3 +1,7 @@
+// INIT
+//
+// Sets up allegro structs for use and cleans up at shutdown.
+
 #ifndef INIT_H
 #define INIT_H
 

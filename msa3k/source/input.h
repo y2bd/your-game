@@ -1,3 +1,7 @@
+// Input Class
+//
+// Detects and stores inputs
+
 #ifndef INPUT_H
 #define INPUT_H
 #include <allegro5/allegro5.h>
