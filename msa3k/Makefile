@@ -20,6 +20,8 @@ $(BUILD)render.o: $(patsubst %,$(SOURCE)%,render.cpp render.h)
 	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
 $(BUILD)gamestate.o: $(patsubst %,$(SOURCE)%,gamestate.cpp gamestate.h)
 	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
+$(BUILD)input.o: $(patsubst %,$(SOURCE)%,input.cpp input.h constants.h)
+	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
 
 .PHONY: clean
 
