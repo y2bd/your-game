@@ -1,0 +1,22 @@
+#ifndef GAMESTATE_H
+#define GAMESTATE_H
+
+using namespace std;
+
+class Gamestate
+{
+private:
+	int x, y;
+	int **ground;
+	int **entities;
+
+public:
+	Gamestate();
+	~Gamestate();
+	void load_map(const char *filename);
+	void update();
+
+	friend class Render;
+}; // class Gamestate
+
+#endif
