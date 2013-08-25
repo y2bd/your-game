@@ -22,6 +22,8 @@ $(BUILD)gamestate.o: $(patsubst %,$(SOURCE)%,gamestate.cpp gamestate.h)
 	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
 $(BUILD)input.o: $(patsubst %,$(SOURCE)%,input.cpp input.h constants.h)
 	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
+$(BUILD)entity.o: $(patsubst %,$(SOURCE)%,entity.cpp entity.h)
+	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
 
 .PHONY: clean
 
