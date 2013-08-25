@@ -1,12 +1,19 @@
 // block
 
 #include <allegro5/allegro5.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 #include <iostream>
+
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 
 #include "constants.h"
 #include "init.h"
 #include "game.h"
 #include "render.h"
+#include "audio.h"
 
 #define MAX_FRAMESKIP 5
   
@@ -19,7 +26,10 @@ void game_loop(ALLEGRO_EVENT_QUEUE **event_queue, ALLEGRO_TIMER **timer,
 
 	Game engine;
 	Render render;
+	Audio audio;
 	ALLEGRO_EVENT event;
+
+	audio.play_song(1);
 
 	while (!*done)
 	{
@@ -52,6 +62,9 @@ void game_loop(ALLEGRO_EVENT_QUEUE **event_queue, ALLEGRO_TIMER **timer,
 		} // if engine updated and even queye is empty (output phase)
 
   } // while
+
+	audio.stop_song();
+
 } // game_loop()
 		  
 int main(int argc, char* argv[])

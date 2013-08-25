@@ -17,6 +17,15 @@ void init(ALLEGRO_EVENT_QUEUE **event_queue, ALLEGRO_TIMER **timer,
 
 	if (!(*timer = al_create_timer (PHYSICS_TIMESTEP)))// Game tick at 60Hz
 	  abort_game("Failed to create timer");
+
+	if(!al_init_acodec_addon())                    // Initialize Audio Codecs
+		abort_game("Failed to initilize audio codecs");
+
+	if(!al_install_audio())                        // Initialize Audio
+		abort_game("Failed to initialize audio engine");
+	
+	if(!al_reserve_samples(20))                    // Reserve audio mixer
+		abort_game("Failed to reserve samples");
 	
 		// Display set to fixed window
 	al_set_new_display_flags(ALLEGRO_WINDOWED);    

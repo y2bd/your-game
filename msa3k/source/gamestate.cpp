@@ -19,10 +19,18 @@ Gamestate::~Gamestate()
 void Gamestate::load_map(const char *filename)
 {
 	FILE *fp;
-	char line[32];
+	char dimensions[32];
 	char *cp;
 
-	if(!(fp = fopen(filename, "rb")))
+	char *env, *line, back[128], path[128];
+	env = getenv("_"); // get executable's path. Specific to Linux
+	strcpy(back, env);
+	line= strrchr(back, '/');
+	line[1] = '\0';
+	sprintf(path,"%sresources/%s", back, filename);
+	printf("looky :%s\n", path);
+
+	if(!(fp = fopen(path, "rb")))
 	{
 		fprintf(stderr, "[Map Error] Count not find and open file.\n");
 		return;
@@ -31,8 +39,8 @@ void Gamestate::load_map(const char *filename)
 	printf("File Found!\n");
 	
 
-	fgets(line, 32, fp);
-	cp = strtok(line, ",\n\r");
+	fgets(dimensions, 32, fp);
+	cp = strtok(dimensions, ",\n\r");
 	x = atoi(cp);
 	cp = strtok(NULL, ",\n\r");
 	y = atoi(cp);

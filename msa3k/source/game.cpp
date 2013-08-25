@@ -2,7 +2,7 @@
 
 Game::Game()
 {
-	gamestate.load_map("resources/new.txt");
+	gamestate.load_map("new.txt");
 } // Game()
 
 void Game::update()

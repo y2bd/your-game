@@ -13,7 +13,14 @@ Render::~Render()
 
 void Render::load_ingame(const Game* engine)
 {
-	gamebg = al_load_bitmap("./resources/pic.png");
+	char *env, *line, back[128], path[128];
+	env = getenv("_"); // get executable's path. Specific to Linux
+	strcpy(back, env);
+	line= strrchr(back, '/');
+	line[1] = '\0';
+
+	sprintf(path,"%sresources/pic.png", back);
+	gamebg = al_load_bitmap(path);
 
 	/*
 	cursor = al_load_bitmap("./sprites/ingameelements/crosshairs/0.png");

@@ -6,6 +6,11 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+
+
 using namespace std;
 
 class Gamestate
