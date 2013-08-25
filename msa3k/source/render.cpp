@@ -13,14 +13,20 @@ Render::~Render()
 
 void Render::load_ingame(const Game* engine)
 {
-	char *env, *line, back[128], path[128];
-	env = getenv("_"); // get executable's path. Specific to Linux
-	strcpy(back, env);
-	line= strrchr(back, '/');
-	line[1] = '\0';
+	// Get path relative to exe
+	ALLEGRO_PATH *path;
+	const char *path_str;
+	char proper_path[128];
 
-	sprintf(path,"%sresources/pic.png", back);
-	gamebg = al_load_bitmap(path);
+	path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
+	path_str = (path) ? al_path_cstr(path, ALLEGRO_NATIVE_PATH_SEP) : "<none>";
+
+	// Load images
+	sprintf(proper_path,"%sresources/pic.png", path_str);
+
+	if(!(gamebg = al_load_bitmap(proper_path)))
+		fprintf(stderr, "[Render Error] resources/pic.png not found\n");
+
 
 	/*
 	cursor = al_load_bitmap("./sprites/ingameelements/crosshairs/0.png");

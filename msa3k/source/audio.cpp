@@ -1,21 +1,22 @@
 #include "audio.h"
-#include "cstdio"
-
 
 Audio::Audio():song_instance(NULL)
 {
-	// get relative path
-	char *env, *line, back[128], path[128];
-	env = getenv("_"); // get executable's path. Specific to Linux
-	strcpy(back, env);
-	line= strrchr(back, '/');
-	line[1] = '\0';
-	
-	sprintf(path,"%sresources/song.ogg", back);
-	song_1 = al_load_sample(path);
+	// Gets path relative to exe
+	ALLEGRO_PATH *path;
+	const char *path_str;
+	char proper_path[128];
 
-	if(!song_1)
-		fprintf(stderr, "[Audio Error] resource/song.ogg not found\n");
+	path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
+	path_str = (path) ? al_path_cstr(path, ALLEGRO_NATIVE_PATH_SEP) : "<none>";
+
+	// Load sounds
+	sprintf(proper_path, "%sresources/song.ogg", path_str);
+
+	if(!(song_1 = al_load_sample(proper_path)))
+		fprintf(stderr, "[Audio Error] resources/song.ogg not found\n");
+	
+	al_destroy_path(path);
 } // Audio()
 
 

@@ -10,8 +10,6 @@
 #include <allegro5/allegro_acodec.h>
 
 #include <cstdio>
-#include <cstdlib>
-#include <cstring>
 
 class Audio
 {

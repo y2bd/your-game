@@ -20,19 +20,21 @@ void Gamestate::load_map(const char *filename)
 {
 	FILE *fp;
 	char dimensions[32];
-	char *cp;
+	char *temp;
 
-	char *env, *line, back[128], path[128];
-	env = getenv("_"); // get executable's path. Specific to Linux
-	strcpy(back, env);
-	line= strrchr(back, '/');
-	line[1] = '\0';
-	sprintf(path,"%sresources/%s", back, filename);
-	printf("looky :%s\n", path);
+	// get path relative to exe
+	ALLEGRO_PATH *path;
+	const char *path_str;
+	char proper_path[128];
 
-	if(!(fp = fopen(path, "rb")))
+	path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
+	path_str = (path) ? al_path_cstr(path, ALLEGRO_NATIVE_PATH_SEP) : "<none>";
+	sprintf(proper_path, "%sresources/new.txt", path_str);
+
+
+	if(!(fp = fopen(proper_path, "rb")))
 	{
-		fprintf(stderr, "[Map Error] Count not find and open file.\n");
+		fprintf(stderr, "[Gamestate Error] Count not find resources/new.txt.\n");
 		return;
 	} // if can't open file
 
@@ -40,10 +42,10 @@ void Gamestate::load_map(const char *filename)
 	
 
 	fgets(dimensions, 32, fp);
-	cp = strtok(dimensions, ",\n\r");
-	x = atoi(cp);
-	cp = strtok(NULL, ",\n\r");
-	y = atoi(cp);
+	temp = strtok(dimensions, ",\n\r");
+	x = atoi(temp);
+	temp = strtok(NULL, ",\n\r");
+	y = atoi(temp);
 
 	printf("x: %d y: %d\n", x, y);
 

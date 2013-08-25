@@ -30,6 +30,7 @@ void game_loop(ALLEGRO_EVENT_QUEUE **event_queue, ALLEGRO_TIMER **timer,
 	ALLEGRO_EVENT event;
 
 	audio.play_song(1);
+	printf("\nClick Close Window Button to quit.\n");
 
 	while (!*done)
 	{

@@ -6,8 +6,7 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-#include <cstdio>
-#include <cstdlib>
+#include "allegro5/allegro5.h"
 #include <cstring>
 
 
