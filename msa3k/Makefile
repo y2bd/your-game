@@ -16,7 +16,7 @@ $(BUILD)init.o: $(patsubst %,$(SOURCE)%,init.cpp init.h constants.h)
 	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
 $(BUILD)game.o: $(patsubst %,$(SOURCE)%,game.cpp game.h gamestate.h)
 	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
-$(BUILD)render.o: $(patsubst %,$(SOURCE)%,render.cpp render.h)
+$(BUILD)render.o: $(patsubst %,$(SOURCE)%,render.cpp render.h constants.h)
 	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
 $(BUILD)audio.o: $(patsubst %,$(SOURCE)%,audio.cpp audio.h)
 	$(CC) -o $@ -c $(LIBS) $(OPTS) $<

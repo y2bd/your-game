@@ -1,8 +1,7 @@
 #include "render.h"
 
-Render::Render()
+Render::Render(): x(0), y(0)
 {
-	x = y = 0;
 }
 
 
@@ -20,7 +19,6 @@ void Render::load_ingame(const Game* engine)
 
 	path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
 	path_str = (path) ? al_path_cstr(path, ALLEGRO_NATIVE_PATH_SEP) : "<none>";
-	al_destroy_path(path);
 
 	// Load images
 	sprintf(proper_path,"%sresources/pic.png", path_str);
@@ -33,6 +31,8 @@ void Render::load_ingame(const Game* engine)
 	cursor = al_load_bitmap("./sprites/ingameelements/crosshairs/0.png");
 		engine->gamestate.currentMap->fetch_map_dimensions(&width, &height);
 	*/
+
+	al_destroy_path(path);
 } // load_ingame()
 
 
@@ -55,6 +55,15 @@ void Render::draw_ingame(const Game* engine, ALLEGRO_DISPLAY **display)
 	al_draw_bitmap(cursor, engine->inputs.aim_x - 10,
 		engine->inputs.aim_y - 10, 0);
 */
-	al_draw_bitmap(gamebg, 0, 0, 0);
+	width = al_get_bitmap_width(gamebg);
+	height = al_get_bitmap_height(gamebg);
+	al_draw_bitmap(gamebg, x, (GAME_HEIGHT - height)/2, 0);
+	al_draw_bitmap(gamebg, x + width, (GAME_HEIGHT - height)/2, 0);
+
+	if(x == -(int)width)
+		x = 0;
+	else
+		x--;
 	al_flip_display();
 } // draw_ingame()
+

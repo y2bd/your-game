@@ -10,6 +10,7 @@
 #include <iostream>
 #include <cstdio>
 
+#include "constants.h"
 #include "game.h"
 
 class Render

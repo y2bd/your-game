@@ -9,7 +9,6 @@ Audio::Audio():song_instance(NULL)
 
 	path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
 	path_str = (path) ? al_path_cstr(path, ALLEGRO_NATIVE_PATH_SEP) : "<none>";
-	al_destroy_path(path);
 
 	// Load sounds
 	sprintf(proper_path, "%sresources/song.ogg", path_str);
@@ -17,6 +16,7 @@ Audio::Audio():song_instance(NULL)
 	if(!(song_1 = al_load_sample(proper_path)))
 		fprintf(stderr, "[Audio Error] resources/song.ogg not found\n");
 	
+	al_destroy_path(path);
 } // Audio()
 
 
@@ -44,6 +44,7 @@ void Audio::play_song(int song_num)
 
 	song_instance = al_create_sample_instance(song);
 	al_set_sample_instance_playmode(song_instance, ALLEGRO_PLAYMODE_LOOP);
+	al_set_sample_instance_gain(song_instance, 0.20);
 	al_attach_sample_instance_to_mixer(song_instance, al_get_default_mixer());
 	al_play_sample_instance(song_instance);
 	printf("Playing Song_%d\n", song_num); // FIXME debug

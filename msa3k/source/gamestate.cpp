@@ -29,13 +29,12 @@ void Gamestate::load_map(const char *filename)
 
 	path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
 	path_str = (path) ? al_path_cstr(path, ALLEGRO_NATIVE_PATH_SEP) : "<none>";
-	al_destroy_path(path);
 
 	sprintf(proper_path, "%sresources/new.txt", path_str);
 
 	if(!(fp = fopen(proper_path, "rb")))
 	{
-		fprintf(stderr, "[Gamestate Error] Count not find resources/new.txt.\n");
+		fprintf(stderr, "[Gamestate Error] Could not find resources/new.txt.\n");
 		return;
 	} // if can't open file
 
@@ -52,7 +51,7 @@ void Gamestate::load_map(const char *filename)
 
 	//ground = new 
 
-
+	al_destroy_path(path);
 } // load_map()
 
 
