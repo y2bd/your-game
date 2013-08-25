@@ -20,6 +20,7 @@ void Render::load_ingame(const Game* engine)
 
 	path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
 	path_str = (path) ? al_path_cstr(path, ALLEGRO_NATIVE_PATH_SEP) : "<none>";
+	al_destroy_path(path);
 
 	// Load images
 	sprintf(proper_path,"%sresources/pic.png", path_str);

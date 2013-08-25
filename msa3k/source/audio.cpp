@@ -9,6 +9,7 @@ Audio::Audio():song_instance(NULL)
 
 	path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
 	path_str = (path) ? al_path_cstr(path, ALLEGRO_NATIVE_PATH_SEP) : "<none>";
+	al_destroy_path(path);
 
 	// Load sounds
 	sprintf(proper_path, "%sresources/song.ogg", path_str);
@@ -16,7 +17,6 @@ Audio::Audio():song_instance(NULL)
 	if(!(song_1 = al_load_sample(proper_path)))
 		fprintf(stderr, "[Audio Error] resources/song.ogg not found\n");
 	
-	al_destroy_path(path);
 } // Audio()
 
 
