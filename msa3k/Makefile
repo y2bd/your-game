@@ -3,8 +3,10 @@ SOURCE = source/
 OBJS := $(patsubst $(SOURCE)%.cpp,$(BUILD)%.o,$(wildcard $(SOURCE)*.cpp))
 
 CC = g++
-OPTS =  -Wall -g -ansi -std=c++11
-LIBS = -lallegro -lallegro_image -lallegro_audio -lallegro_acodec
+OPTS = -Wall -g -ansi -std=c++11
+LIBS = `pkg-config --libs --static allegro-static-5 allegro_image-static-5\
+ allegro_audio-static-5 allegro_acodec-static-5`
+#LIBS = -lallegro -lallegro_image -lallegro_audio -lallegro_acodec
 
 msa3k.out: $(OBJS)
 	$(CC) -o $@ $(OBJS) $(OPTS) $(LIBS)

@@ -1,0 +1,13 @@
+// List of useful links
+
+	// Allegro 5 Manual
+	https://www.allegro.cc/manual/5/
+
+	// Allegro 5 installation for Linux
+	http://wiki.allegro.cc/index.php?title=Install_Allegro5_From_SVN/Linux/Debian
+
+	// Statically linking Allegro libraries
+	https://ventilatorxor.wordpress.com/2011/08/07/linux-allegro5-static-linking-for-beginners/
+
+	// Cross Compiling for Windows on Linux
+	http://www.blogcompiler.com/2010/07/11/compile-for-windows-on-linux/
