@@ -44,7 +44,7 @@ void Audio::play_song(int song_num)
 
 	song_instance = al_create_sample_instance(song);
 	al_set_sample_instance_playmode(song_instance, ALLEGRO_PLAYMODE_LOOP);
-	al_set_sample_instance_gain(song_instance, 0.20);
+	al_set_sample_instance_gain(song_instance, 0.60);
 	al_attach_sample_instance_to_mixer(song_instance, al_get_default_mixer());
 	al_play_sample_instance(song_instance);
 	printf("Playing Song_%d\n", song_num); // FIXME debug

@@ -8,7 +8,3 @@ Game::Game()
 void Game::update()
 {
 } // update()
-
-void Game::send_buffer()
-{
-} // send_buffer()

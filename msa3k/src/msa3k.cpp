@@ -51,7 +51,7 @@ void game_loop(ALLEGRO_EVENT_QUEUE **event_queue, ALLEGRO_TIMER **timer,
 			if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) // close window clicked
 				break;
 
-			//engine.inputs.gather(&event);
+			engine.inputs.gather(&event);
 		} // else collect inputs
 
  		if (redraw && al_is_event_queue_empty(*event_queue))
