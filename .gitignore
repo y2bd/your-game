@@ -14,3 +14,7 @@
 
 # Compiled Executables
 *.out
+*.exe
+
+# Text Editing
+*.swp

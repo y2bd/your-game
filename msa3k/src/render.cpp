@@ -1,6 +1,6 @@
 #include "render.h"
 
-Render::Render(): x(0), y(999999)
+Render::Render(): x(0), y(0)
 {
 }
 
@@ -39,8 +39,6 @@ void Render::draw_ingame(const Game* engine, ALLEGRO_DISPLAY **display)
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
 	// move demo
-	if(y == 999999)
-		y = (GAME_HEIGHT - height)/2;
 	/*
 	if(engine->inputs.up)
 		y += 10;

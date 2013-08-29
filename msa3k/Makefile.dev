@@ -1,4 +1,4 @@
-BUILD = build/
+BUILD = dev-build/
 SOURCE = src/
 OBJS := $(patsubst $(SOURCE)%.cpp,$(BUILD)%.o,$(wildcard $(SOURCE)*.cpp))
 
