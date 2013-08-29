@@ -1,8 +1,6 @@
 // block
 
 #include <allegro5/allegro5.h>
-#include <allegro5/allegro_audio.h>
-#include <allegro5/allegro_acodec.h>
 #include <iostream>
 
 #include <cstdio>
