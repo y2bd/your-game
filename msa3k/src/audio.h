@@ -10,11 +10,12 @@
 #include <allegro5/allegro_acodec.h>
 
 #include <cstdio>
+#include "helper.h"
 
 class Audio
 {
 private:
-	ALLEGRO_SAMPLE *song_1, *song_2;
+	ALLEGRO_SAMPLE *song_1, *song_2, *sound_1;
 	ALLEGRO_SAMPLE_INSTANCE *song_instance;
 	int is_playing;
 
@@ -26,7 +27,7 @@ public:
 	void play_song(int song_num);
 	void stop_song();
 	int get_is_playing();
-	void play_sound(int sound_num);
+	void play_sound(int sound_num, float pan);
 }; // class Audio
 
 #endif

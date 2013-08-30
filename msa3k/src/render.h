@@ -11,11 +11,10 @@
 #include <cstdio>
 
 #include "constants.h"
-//#include "game.h"
 #include "input.h"
+#include "helper.h"
 
-int resolve_load(ALLEGRO_BITMAP **image, const char *path_str,
-	const char *filename);
+
 
 class Render
 {

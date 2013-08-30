@@ -15,7 +15,9 @@ void Game::update()
 	audio_manager->play_song(2);
 	if (inputs.wild_down == 67 && gamestate_mode == TITLE_SCREEN)
 	{
+		audio_manager->play_sound(1, -1.0);
 		al_rest(0.25);
+		audio_manager->play_sound(1, 1.0);
 		inputs.wild_down = 0;
 		audio_manager->stop_song();
 		audio_manager->play_song(1);
@@ -24,8 +26,9 @@ void Game::update()
 	
 	if (inputs.wild_down == 67 && gamestate_mode == PLATFORM_SCREEN)
 	{
-
+		audio_manager->play_sound(1, 1.0);
 		al_rest(0.25);
+		audio_manager->play_sound(1, -1.0);
 		inputs.wild_down = 0;
 		audio_manager->stop_song();
 		audio_manager->play_song(2);

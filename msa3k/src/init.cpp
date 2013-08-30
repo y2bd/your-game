@@ -24,7 +24,7 @@ void init(ALLEGRO_EVENT_QUEUE **event_queue, ALLEGRO_TIMER **timer,
 	if(!al_install_audio())                        // Initialize Audio
 		abort_game("Failed to initialize audio engine");
 	
-	if(!al_reserve_samples(20))                    // Reserve audio mixer
+	if(!al_reserve_samples(32))                    // Reserve audio mixer
 		abort_game("Failed to reserve samples");
 	
 		// Display set to fixed window
@@ -49,15 +49,6 @@ void init(ALLEGRO_EVENT_QUEUE **event_queue, ALLEGRO_TIMER **timer,
 
 
 
-void abort_game(const char* message) // initialization failed
-{
-  printf("Initialization Failed:\n%s \n", message);
-	printf("Aborting...\n");
-  exit(1);
-} // abort_game()
-
-
-
 void shutdown(ALLEGRO_EVENT_QUEUE **event_queue, ALLEGRO_TIMER **timer,
 	ALLEGRO_DISPLAY **display)
 {
@@ -69,4 +60,7 @@ void shutdown(ALLEGRO_EVENT_QUEUE **event_queue, ALLEGRO_TIMER **timer,
 														  
 	if (*event_queue)
 	  al_destroy_event_queue(*event_queue);
+
+	printf("Stopped cleanly.\n");
+	
 } // shutdown()

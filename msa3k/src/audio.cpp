@@ -2,27 +2,18 @@
 
 Audio::Audio():song_instance(NULL), is_playing(0)
 {
-	// Gets path relative to exe
-	ALLEGRO_PATH *path;
-	const char *path_str;
-	char proper_path[128];
+	ALLEGRO_PATH *exe_path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
+	int error_exists = 0;
 
-	path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
-	path_str = (path) ? al_path_cstr(path, ALLEGRO_NATIVE_PATH_SEP) : "<none>";
+	error_exists += resolve_load(&song_1, &exe_path, "resources/song.ogg");
+	error_exists += resolve_load(&song_2, &exe_path, "resources/title.wav");
 
-	// Load sounds
-	sprintf(proper_path, "%sresources/song.ogg", path_str);
+	error_exists += resolve_load(&sound_1, &exe_path, "resources/coin.wav");
 
-	if(!(song_1 = al_load_sample(proper_path)))
-		fprintf(stderr, "[Audio Error] resources/song.ogg not found\n");
+	al_destroy_path(exe_path);
 
-	sprintf(proper_path, "%sresources/title.wav", path_str);
-
-	if(!(song_2 = al_load_sample(proper_path)))
-		fprintf(stderr, "[Audio Error] resources/title.wav not found\n");
-
-	
-	al_destroy_path(path);
+	if(error_exists)
+		abort_game("Could not find all the audio resources!");
 } // Audio()
 
 
@@ -30,6 +21,8 @@ Audio::Audio():song_instance(NULL), is_playing(0)
 Audio::~Audio()
 {
 	al_destroy_sample(song_1);
+	al_destroy_sample(song_2);
+	al_destroy_sample(sound_1);
 	al_destroy_sample_instance(song_instance);
 } // ~Audio()
 
@@ -62,9 +55,10 @@ void Audio::play_song(int song_num)
 	al_set_sample_instance_playmode(song_instance, ALLEGRO_PLAYMODE_LOOP);
 	al_set_sample_instance_gain(song_instance, gain);
 	al_attach_sample_instance_to_mixer(song_instance, al_get_default_mixer());
-	al_play_sample_instance(song_instance);
-	printf("Playing Song_%d\n", song_num); // FIXME debug
 
+	al_play_sample_instance(song_instance);
+
+	printf("Playing Song_%d\n", song_num); // FIXME debug
 	is_playing = 1;
 } // play_song()
 
@@ -76,7 +70,6 @@ void Audio::stop_song()
 		return;
 
 	al_stop_sample_instance(song_instance);
-
 	is_playing = 0;
 } // stop_song()
 
@@ -89,8 +82,21 @@ int Audio::get_is_playing()
 
 
 
-void Audio::play_sound(int sound_num)
+void Audio::play_sound(int sound_num, float pan)
 {
-	//al_play_sample(soundeffects)
+	ALLEGRO_SAMPLE *sound;
+	//double gain;
+	switch(sound_num)
+	{
+		case 1:
+		sound = sound_1;
+		break;
+		default:
+			return;
+			break;
+	} // case(song_num)
+
+	if(!(al_play_sample(sound, 1.6, pan, 1.0, ALLEGRO_PLAYMODE_ONCE, 0)))
+		fprintf(stderr, "[Audio Error] Could not play sample %d!\n", sound_num);
 } // play_sound()
 

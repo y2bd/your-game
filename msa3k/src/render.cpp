@@ -1,39 +1,21 @@
 #include "render.h"
 
-int resolve_load(ALLEGRO_BITMAP **image, const char *path_str,
-	const char *filename)
-{
-	char proper_path[512];
-	sprintf(proper_path, "%s%s", path_str, filename);
-	
-	if(!(*image = al_load_bitmap(proper_path)))
-	{
-		fprintf(stderr, "Render Error %s not found!\n", filename);
-		return 0;
-	} // if image load failed (NULL)
-
-	return 1;
-} // resolve_load()
-
 
 
 Render::Render(ALLEGRO_DISPLAY **display): x(0), y(0), display(display)
 {
 // Get path relative to exe
-	ALLEGRO_PATH *path;
-	const char *path_str;
+	ALLEGRO_PATH *exe_path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
 	int error_exists = 0;
 
-	path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
-	path_str = (path) ? al_path_cstr(path, ALLEGRO_NATIVE_PATH_SEP) : "<none>";
+	error_exists += resolve_load(&gamebg, &exe_path, "resources/pic.png");
+	error_exists += resolve_load(&cursor, &exe_path, "resources/cursor.png");
+	error_exists += resolve_load(&title, &exe_path, "resources/title.png");
 
-	error_exists += resolve_load(&gamebg, path_str, "resources/pic.png");
-	error_exists += resolve_load(&cursor, path_str, "resources/cursor.png");
-	error_exists += resolve_load(&title, path_str, "resources/title.png");
+	al_destroy_path(exe_path);
 
-	//if(error)
-
-	al_destroy_path(path);
+	if(error_exists)
+		abort_game("Could not find all the graphical resources!");
 } // Render()
 
 
@@ -56,6 +38,7 @@ void Render::draw_title()
 	al_draw_bitmap(title, 0, 0, 0);
 	al_flip_display();
 } // draw_title()
+
 
 
 void Render::draw_ingame(const Input *inputs)

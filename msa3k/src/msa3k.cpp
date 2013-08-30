@@ -8,6 +8,7 @@
 #include <cstring>
 
 #include "constants.h"
+#include "helper.h"
 #include "init.h"
 #include "game.h"
 #include "render.h"
