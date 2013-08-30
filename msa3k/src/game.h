@@ -11,20 +11,31 @@
 
 #include "input.h"
 #include "gamedata.h"
+#include "render.h"
+#include "audio.h"
 
 using namespace std;
+
+enum States
+{
+	TITLE_SCREEN,
+	PLATFORM_SCREEN
+}; // enum States
 
 class Game
 {
 	Gamedata gamedata;
+	int gamestate_mode;
+	Audio *audio_manager;
+	Render *render_manager;
 	
 public:
 	Input inputs;
 
-	Game();
+	Game(Audio *audio, Render *render);
 	void update();
+	void draw();
 
-	friend class Render;
 };
 
 #endif

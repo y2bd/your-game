@@ -1,40 +1,64 @@
 #include "render.h"
 
-Render::Render(): x(0), y(0)
+int resolve_load(ALLEGRO_BITMAP **image, const char *path_str,
+	const char *filename)
 {
-}
+	char proper_path[512];
+	sprintf(proper_path, "%s%s", path_str, filename);
+	
+	if(!(*image = al_load_bitmap(proper_path)))
+	{
+		fprintf(stderr, "Render Error %s not found!\n", filename);
+		return 0;
+	} // if image load failed (NULL)
+
+	return 1;
+} // resolve_load()
 
 
-Render::~Render()
+
+Render::Render(ALLEGRO_DISPLAY **display): x(0), y(0), display(display)
 {
-}
-
-
-void Render::load_ingame(const Game* engine)
-{
-	// Get path relative to exe
+// Get path relative to exe
 	ALLEGRO_PATH *path;
 	const char *path_str;
-	char proper_path[128];
+	int error_exists = 0;
 
 	path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
 	path_str = (path) ? al_path_cstr(path, ALLEGRO_NATIVE_PATH_SEP) : "<none>";
 
-	// Load images
-	sprintf(proper_path,"%sresources/pic.png", path_str);
+	error_exists += resolve_load(&gamebg, path_str, "resources/pic.png");
+	error_exists += resolve_load(&cursor, path_str, "resources/cursor.png");
+	error_exists += resolve_load(&title, path_str, "resources/title.png");
 
-	if(!(gamebg = al_load_bitmap(proper_path)))
-		fprintf(stderr, "[Render Error] resources/pic.png not found\n");
-
-
-	sprintf(proper_path,"%sresources/cursor.png", path_str);
-	cursor = al_load_bitmap(proper_path);
+	//if(error)
 
 	al_destroy_path(path);
+} // Render()
+
+
+
+Render::~Render()
+{
+} // ~Render()
+
+
+
+void Render::load_ingame()
+{
 } // load_ingame()
 
 
-void Render::draw_ingame(const Game* engine, ALLEGRO_DISPLAY **display)
+
+void Render::draw_title()
+{
+	al_clear_to_color(al_map_rgb(0, 0, 0));
+	al_draw_bitmap(title, 0, 0, 0);
+	al_flip_display();
+} // draw_title()
+
+
+void Render::draw_ingame(const Input *inputs)
 {
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
@@ -45,15 +69,15 @@ void Render::draw_ingame(const Game* engine, ALLEGRO_DISPLAY **display)
 	if(engine->inputs.down)
 		y -= 10;
 	*/
-	if(engine->inputs.right)
+	if(inputs->right)
 		x -= 5;
-	if(engine->inputs.left)
+	if(inputs->left)
 		x += 5;
 	/*al_draw_scaled_bitmap(gamebg, 0, 0, (float)width, (float)height,
 		x, y, (float)width * 8, (float)height * 8, 0);
 	*/
 
-	if(x < -(int)width || x > (int)width)
+	if(x < -(int)width)
 		x = 0;
 	else
 		x -= 1;
@@ -63,10 +87,8 @@ void Render::draw_ingame(const Game* engine, ALLEGRO_DISPLAY **display)
 	al_draw_bitmap(gamebg, x, (GAME_HEIGHT - height)/2, 0);
 	al_draw_bitmap(gamebg, x + width, (GAME_HEIGHT - height)/2, 0);
 
-	
 	// Draw Cursor
-	al_draw_bitmap(cursor, engine->inputs.aim_x - 110,
-		engine->inputs.aim_y - 10, 0);
+	al_draw_bitmap(cursor, inputs->aim_x - 110, inputs->aim_y - 10, 0);
 
 	al_flip_display();
 } // draw_ingame()

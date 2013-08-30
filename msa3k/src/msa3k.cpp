@@ -19,15 +19,15 @@ void game_loop(ALLEGRO_EVENT_QUEUE **event_queue, ALLEGRO_TIMER **timer,
 	ALLEGRO_DISPLAY **display, bool *done)
 {
 	bool redraw = true; // True means we need to redraw screen
-	int mode = 2, loaded = 0; // mode 2 is in game.
+	//int mode = 2, loaded = 0; // mode 2 is in game.
 	al_start_timer(*timer);
 
-	Game engine;
-	Render render;
+	Render render(display);
 	Audio audio;
 	ALLEGRO_EVENT event;
 
-	audio.play_song(1);
+	Game engine(&audio, &render);
+
 	printf("\nClick Close Window Button to quit.\n");
 
 	while (!*done)
@@ -38,13 +38,6 @@ void game_loop(ALLEGRO_EVENT_QUEUE **event_queue, ALLEGRO_TIMER **timer,
 		{
 			redraw = true;
 			engine.update(); 		 // Update engine
-			
-			if(loaded == 0 && mode == 2)
-			{
-				render.load_ingame(&engine); // Load resources for graphics
-				loaded = 1;
-			} // if in game and not loaded
-
 		} // if timer ticked (update phase)
 		else
 		{
@@ -57,12 +50,10 @@ void game_loop(ALLEGRO_EVENT_QUEUE **event_queue, ALLEGRO_TIMER **timer,
  		if (redraw && al_is_event_queue_empty(*event_queue))
 		{
 			redraw = false;
-			render.draw_ingame(&engine, display); // Draws graphics.
+			engine.draw();
 		} // if engine updated and even queye is empty (output phase)
 
   } // while
-
-	audio.stop_song();
 
 } // game_loop()
 		  

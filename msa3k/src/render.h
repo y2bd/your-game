@@ -11,19 +11,27 @@
 #include <cstdio>
 
 #include "constants.h"
-#include "game.h"
+//#include "game.h"
+#include "input.h"
+
+int resolve_load(ALLEGRO_BITMAP **image, const char *path_str,
+	const char *filename);
 
 class Render
 {
+private:
 	unsigned int width, height;
 	int x, y;
-	ALLEGRO_BITMAP *cursor, *gamebg;
+	ALLEGRO_BITMAP *cursor, *gamebg, *title;
+	ALLEGRO_DISPLAY **display;
+
 public:
-	Render();
+	Render(ALLEGRO_DISPLAY **display);
 	~Render();
 	
-	void load_ingame(const Game* engine);
-	void draw_ingame(const Game* engine, ALLEGRO_DISPLAY **display);
+	void load_ingame();
+	void draw_title();
+	void draw_ingame(const Input *inputs);
 }; // class render
 
 #endif

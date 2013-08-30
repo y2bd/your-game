@@ -3,7 +3,7 @@
 Input::Input():
 	up(0), down(0), left(0), right(0), space(0),
 	leftmouse(0), middlemouse(0), rightmouse(0),
-	aim_angle(0), aim_x(GAME_WIDTH/2), aim_y(GAME_HEIGHT/2)
+	aim_angle(0), aim_x(GAME_WIDTH/2), aim_y(GAME_HEIGHT/2), wild_down(0)
 {
 } // Input constructor
 
@@ -61,6 +61,8 @@ void Input::gather(const ALLEGRO_EVENT *event)
 	{
 		std::cout << event->keyboard.keycode << std::endl;
 
+		wild_down = event->keyboard.keycode;
+
 		switch(event->keyboard.keycode)
 		{
 			case ALLEGRO_KEY_W:
@@ -81,6 +83,8 @@ void Input::gather(const ALLEGRO_EVENT *event)
 	if(event->type == ALLEGRO_EVENT_KEY_UP)
 	{
 		std::cout << event->keyboard.keycode << std::endl;
+
+		wild_down = 0;
 
 		switch(event->keyboard.keycode)
 		{

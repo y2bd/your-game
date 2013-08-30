@@ -16,6 +16,7 @@ private:
 	bool leftmouse, middlemouse, rightmouse;
 	double aim_angle;
 	int aim_x, aim_y; // raw
+	int wild_down;
 	//int controls[8]; // will read control from file to map keys
 
 public:
