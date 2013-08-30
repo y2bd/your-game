@@ -10,13 +10,13 @@
 #include <iostream>
 
 #include "input.h"
-#include "gamestate.h"
+#include "gamedata.h"
 
 using namespace std;
 
 class Game
 {
-	Gamestate gamestate;
+	Gamedata gamedata;
 	
 public:
 	Input inputs;

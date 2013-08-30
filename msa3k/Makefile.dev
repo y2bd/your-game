@@ -21,18 +21,21 @@ render.h audio.h)
 	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
 $(BUILD)init.o: $(patsubst %,$(SOURCE)%,init.cpp init.h constants.h)
 	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
-$(BUILD)game.o: $(patsubst %,$(SOURCE)%,game.cpp game.h gamestate.h)
+$(BUILD)game.o: $(patsubst %,$(SOURCE)%,game.cpp game.h gamedata.h)
 	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
 $(BUILD)render.o: $(patsubst %,$(SOURCE)%,render.cpp render.h constants.h)
 	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
 $(BUILD)audio.o: $(patsubst %,$(SOURCE)%,audio.cpp audio.h)
 	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
-$(BUILD)gamestate.o: $(patsubst %,$(SOURCE)%,gamestate.cpp gamestate.h)
+$(BUILD)gamedata.o: $(patsubst %,$(SOURCE)%,gamedata.cpp gamedata.h)
 	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
 $(BUILD)input.o: $(patsubst %,$(SOURCE)%,input.cpp input.h constants.h)
 	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
 $(BUILD)entity.o: $(patsubst %,$(SOURCE)%,entity.cpp entity.h)
 	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
+$(BUILD)gamestate.o: $(patsubst %,$(SOURCE)%,gamestate.cpp gamestate.h)
+	$(CC) -o $@ -c $(LIBS) $(OPTS) $<
+
 
 .PHONY: clean
 
