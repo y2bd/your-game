@@ -10,7 +10,7 @@
 
 class Entity
 {
-private:
+protected:
 	int id_num;
 	int x, y; // position
 	int vx, vy; // velocity

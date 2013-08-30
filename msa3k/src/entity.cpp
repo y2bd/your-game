@@ -5,8 +5,6 @@ Entity::Entity(int i): id_num(i),
 {
 } // Entity()
 
-
-
 int Entity::fetch_id()
 {
 	return id_num;

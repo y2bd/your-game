@@ -9,11 +9,9 @@ Gamestate::Gamestate()
 } // Gamestate()
 
 
-
 Gamestate::~Gamestate()
 {
 } // ~Gamestate()
-
 
 
 void Gamestate::load_map(const char *filename)
